@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<title>ЕГЭ 2017</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/normalize.css" media="all">
+	<link rel="stylesheet" href="css/style.css" media="all">
+	<link href="https://fonts.googleapis.com/css?family=Cuprum:400,400i%7CPT+Sans:400,700&amp;subset=cyrillic" rel="stylesheet">
+	<style media="all,print,screen"></style>
+
+	<!--[if it IE]>-->
+          <script type="text/javascript" src="js/html5shiv.js"></script>
+    <!--<![endif]-->
+</head>
+
+<body>
+<div class="wrapper">
+	<form id="channel__list" action="php/function.php" method="GET">
+		<fieldset>
+			<legend>Список каналов регистратора Netris ITX</legend>
+
+			<label for="registarator__ip">
+				<span>Список id каналов регистратора:</span>
+				<input id="registarator__ip" name="registarator__ip" type="text" required pattern="\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}">
+			</label>
+
+			<button class="btn" type="submit" form="channel__list">Получить !</button>
+		</fieldset>		
+	</form>
+
+	<form id="camera__result" action="php/function.php" method="GET">
+		<fieldset>
+			<legend>Управление каналами Netris ITX</legend>
+
+			<label for="select__action"><span>Выберите действие:</span></label>
+
+			<select id="select__action">
+		        <option value="channel__suspend">Остановить канал:</option>
+		        <option value="channel__restart">Перезапустить канала:</option>
+	      	</select>
+
+	      	<label for="camera__ip"><span>id камеры:</span>				
+				<input id="camera__id" name="camera__id" type="text" required>
+			</label>
+
+			<button class="btn" type="submit" form="camera__result">Поехали !</button>
+		</fieldset>	
+	</form>
+
+</div>
+</body>
+</html>

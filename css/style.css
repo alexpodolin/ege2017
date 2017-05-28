@@ -1,0 +1,43 @@
+body {
+    font-size: 18px;    
+    font-weight: normal;
+    font-family: "Cuprum", Arial, sans-serif;
+    line-height: 24px;
+    color: #000000;    
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.btn {
+    background-color: #ee3643;    
+    color: #ffffff;     
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center; 
+    font-family: "Cuprum", Arial, sans-serif;   
+    cursor: pointer;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px
+
+}
+.btn:hover {
+    background-color: #ca2c37;    
+}
+.btn:active {
+    background-color: #ba2732;    
+    color: #f7eaeb;
+}
+.wrapper {      
+    width: 1280px;
+    margin: 10% auto;
+    padding: 5px 5px;   
+    height: auto;
+    overflow: hidden;
+    position: relative;
+    background: transparent;    
+}
+fieldset {
+    border-radius: 3px
+}
