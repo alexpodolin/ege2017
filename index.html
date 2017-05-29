@@ -6,31 +6,67 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="css/normalize.css" media="all">
-	<link rel="stylesheet" href="css/style.css" media="all">
+	<link rel="stylesheet" href="css/bootstrap.css" media="all">
 	<link href="https://fonts.googleapis.com/css?family=Cuprum:400,400i%7CPT+Sans:400,700&amp;subset=cyrillic" rel="stylesheet">
 	<style media="all,print,screen"></style>
 
 	<!--[if it IE]>-->
           <script type="text/javascript" src="js/html5shiv.js"></script>
     <!--<![endif]-->
+
+    <script type="text/javascript" src="js/bootstrap.js"></script>
 </head>
 
 <body>
-<div class="wrapper">
-	<form id="camera_mngt" action="php/function.php" method="GET">
-		<fieldset>
-			<legend>Управление каналами Netris ITX</legend>			
+<div class="container">
+<div class="row-fluid">
+	<div class="col-lg-8 col-md-7 col-sm-6 col-xs-8">
+		<form role="form"  id="camera_mngt" action="php/channels.php" method="GET" class="col-md-6">
+			<div class="form-group">
+				<fieldset>					
+					<legend>Управление каналами регистраторов Netris ITX</legend>	
 
-			<label for="registrator__ip">
-				<span>Укажите ip адрес регистратора:</span>
-				<input id="registrator__ip" name="registrator__ip" type="text" required pattern="\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}">
-			</label>			
+					<div class="form-group">
+					<label for="registrator__ip">
+						<span>Укажите ip адрес регистратора:</span>
+						<div class="form-group has-success input-group-btn">
+							<input class="form-control " id="registrator__ip" name="registrator__ip" type="text" required pattern="\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}">
+						</div>
+					</label>
+					</div>				
 
-			<button class="btn" name="btn__stop" type="submit" form="camera_mngt">Остановить Каналы</button>
-			<button class="btn" name="btn__restart" type="submit" form="camera_mngt">Перезапустить Каналы</button>
-		</fieldset>	
-	</form>
+					<button class="btn btn-danger btn-md btn-block " name="btn__stop" type="submit" form="camera_mngt">
+					<span class="glyphicon glyphicon-pause">&nbsp;</span>Остановить Каналы</button>
+					<button class="btn btn-success btn-md btn-block" name="btn__restart" type="submit" form="camera_mngt"><span class="glyphicon glyphicon-refresh">&nbsp;</span>Перезапустить Каналы</button>
+				</fieldset>	
+			</div>
+		</form>
 
+		<form role="form"  id="registrator_list" action="php/registrators.php" method="GET" class="col-md-6">
+			<div class="form-group">
+				<fieldset>					
+					<legend>Управление регистраторами Netris ITX</legend>	
+											
+					<div class="form-group">
+					<label for="exam__date">
+						<span>Укажите дату проведения экзамена:</span>
+						<div class="form-group has-success input-group-btn">
+							<input class="form-control" id="exam__date" name="exam__date" type="date" required>
+						</div>
+					</label>
+					</div>				
+
+					<button class="btn btn-info btn-md btn-block" name="reg__list" type="submit" form="registrator_list">
+					<span class="glyphicon glyphicon-calendar">&nbsp;</span>Получить Список</button>
+
+				</fieldset>	
+			</div>
+		</form>
+
+	</div>
 </div>
+</body>
+
+
 </body>
 </html>

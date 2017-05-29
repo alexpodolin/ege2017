@@ -68,12 +68,14 @@ function manageChannelId($camId, $registratorIp) {
 			curl_close($ch);
 		}		
 	}
-}
 
+	unset($registratorIp);
+	unset($camId);
+}
 
 // Ф-ия получающия список(массив) id камер
 $camId = getChannelIdList($registratorIp);
-// Ф-ия управляющая ка мерами
+// Ф-ия управляющая камерами (стоп/старт)
 manageChannelId($camId, $registratorIp);
 
 ?>

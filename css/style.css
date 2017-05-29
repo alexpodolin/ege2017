@@ -18,9 +18,9 @@ body {
     font-family: "Cuprum", Arial, sans-serif;   
     cursor: pointer;
     border: none;
-    padding: 5px 10px;
-    border-radius: 3px
-
+    /*padding: 5px 10px;*/
+    border-radius: 3px;
+    width: 200px;
 }
 .btn:hover {
     background-color: #ca2c37;    
@@ -30,7 +30,7 @@ body {
     color: #f7eaeb;
 }
 .wrapper {      
-    width: 1280px;
+    max-width: 1280px;
     margin: 10% auto;
     padding: 5px 5px;   
     height: auto;
@@ -38,6 +38,6 @@ body {
     position: relative;
     background: transparent;    
 }
-fieldset {
+fieldset {    
     border-radius: 3px
 }
