@@ -4,6 +4,7 @@ $servername = "localhost";
 $dbname = "egeSchedule";
 $username = "scheduler";
 $password = "ZxcAsdQwe";
+$charset = 'utf8';
 
 $opt = [
 	PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -12,14 +13,12 @@ $opt = [
   ];
 
 try {
-	    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password, $opt);
-	    //$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	    //echo "Connected successfully"; 
+	    $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=$charset", $username, $password, $opt);
+	    // echo "Connected successfully"; 
     }
-catch(PDOException $e)
+catch (PDOException $e)
     {
    		echo "Connection failed: " . $e->getMessage();
     }
 
-$conn = null;
 ?>

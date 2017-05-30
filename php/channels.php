@@ -1,80 +1,17 @@
 <?php
-header('Content-Type: text/html; charset=utf-8');
 
+// Получение списков id камер(каналов) и 
+// управление этими камерами для выбранного регистратора
+
+require_once 'function.php';
+
+// ip адрес регистратора
 $registratorIp = $_GET['registrator__ip'];
 
-function getChannelIdList($registratorIp) {
-$urlRegistrator = "http://$registratorIp:2032/list";	
-
-	// инициализируем соединение
-	$ch = curl_init($urlRegistrator);	
-
-	// запишем рез. в перем. а не выведем в браузер
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);	
-	$data = curl_exec($ch);
-
-	// закроем соединение
-	curl_close($ch);
-
-	// переведем данные в json формат
-	$dataToJson = json_decode($data, true);
-
-	// вычление список все id камер	
-	if (is_array($dataToJson)) 
-	{
-		foreach($dataToJson as $list => $array) {
-			if (is_array($array)) 
-			{
-				foreach($array as $cameraId => $cameraArray) {			
-					$camId[] = $cameraArray['channel']['id'];									
-				}
-			}
-		}
-	}
-	// возвратим camId как рез-т работы ф-ции
-	return $camId;
-}
-
-function manageChannelId($camId, $registratorIp) {
-
-	// Если нажа кнопка stop
-	if (isset($_GET['btn__stop']) and is_array($camId)) {		
-		foreach ($camId as $id=> $value) {
-			$ch = curl_init("http://$registratorIp:2032/$value/suspend");
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			$stopResult = curl_exec($ch);
-				if ($stopResult === FALSE) {
-					echo "камера с id = $value не была остановлена" . "</br>";
-				}
-				else {
-					echo "камера с id = $value остановлена". "</br>";					
-				}										
-			curl_close($ch);
-		}		
-	}
-
-	// Если нажа кнопка restart
-	if (isset($_GET['btn__restart']) and is_array($camId)) {		
-		foreach ($camId as $id=> $value) {
-			$ch = curl_init("http://$registratorIp:2032/$value/restart");
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			$restartResult = curl_exec($ch);
-				if ($restartResult  === FALSE) {
-					echo "камера с id = $value не была включена" . "</br>";
-				}
-				else {
-					echo "камера с id = $value включена". "</br>";					
-				}										
-			curl_close($ch);
-		}		
-	}
-
-	unset($registratorIp);
-	unset($camId);
-}
 
 // Ф-ия получающия список(массив) id камер
 $camId = getChannelIdList($registratorIp);
+
 // Ф-ия управляющая камерами (стоп/старт)
 manageChannelId($camId, $registratorIp);
 
