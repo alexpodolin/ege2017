@@ -11,6 +11,8 @@ $urlRegistrator = "http://$registratorIp:2032/list";
 
 	// запишем рез. в перем. а не выведем в браузер
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);	
+	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);	
+	curl_setopt($ch, CURLOPT_TIMEOUT, 5);	
 	$data = curl_exec($ch);
 
 	// закроем соединение
@@ -23,7 +25,7 @@ $urlRegistrator = "http://$registratorIp:2032/list";
 	if (is_array($dataToJson)) 
 	{
 		foreach($dataToJson as $list => $array) {
-			if (is_array($array)) 
+			if (is_array($array) and (count($array)> 0) ) 
 			{
 				foreach($array as $cameraId => $cameraArray) {			
 					$camId[] = $cameraArray['channel']['id'];									
@@ -79,14 +81,16 @@ function examDateList() {
 
 	// Дата экзамена
 	$examDate = $_GET['exam__date'];	
+
+	// Запрос на выборку ip адресов регистраторов при выбранной дате
 	global $conn;
+	$queryRegDate = 'SELECT * FROM schedule WHERE date = :date';
+	$stmt = $conn->prepare($queryRegDate) ;
+ 	$stmt->execute(array(':date' => $examDate));
+ 	$result = $stmt->fetchAll();	// Извлечем все данные
 
-	if (isset($examDate) and isset($_GET['reg__list'])) {
-		$queryRegDate = 'SELECT * FROM schedule WHERE date = :date';
-		$stmt = $conn->prepare($queryRegDate) ;
-     	$stmt->execute(array(':date' => $examDate));
-     	$result = $stmt->fetchAll();	// Извлечем все данные
-
+	// Если задана дата
+	if (isset($examDate)) {	
      	// Пройдемся по массиву массивов и извлечем ip адреса регистраторов
 		if (is_array($result)) {
 			foreach ($result as $key => $value) {
@@ -94,7 +98,8 @@ function examDateList() {
 			}
 		}
    	}
-   	// Получим массив с ip адресами регистраторов
+
+   	// Вернем массив с ip адресами регистраторов
    	return $ipddrArr;
 }
 
