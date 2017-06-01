@@ -80,12 +80,12 @@ function manageChannelId($camId, $registratorIp) {
 function examDateList() {
 
 	// Дата экзамена
-	$examDate = $_GET['exam__date'];	
+	$examDate = $_GET['exam__date'];			
+	global $conn;
 
 	// Запрос на выборку ip адресов регистраторов при выбранной дате
-	global $conn;
 	$queryRegDate = 'SELECT * FROM schedule WHERE date = :date';
-	$stmt = $conn->prepare($queryRegDate) ;
+	$stmt = $conn->prepare($queryRegDate);
  	$stmt->execute(array(':date' => $examDate));
  	$result = $stmt->fetchAll();	// Извлечем все данные
 
@@ -99,7 +99,21 @@ function examDateList() {
 		}
    	}
 
-   	// Вернем массив с ip адресами регистраторов
+   	$queryAllIp = 'SELECT DISTINCT ipaddr FROM schedule';
+   	$stmt = $conn->prepare($queryAllIp);
+   	$stmt->execute();
+   	$resultAllIp = $stmt->fetchAll();// Вернем массив с ip адресами регистраторов
+
+   	// Если не задана дата
+	if (empty($examDate)) {	
+     	// Пройдемся по массиву массивов и извлечем ip адреса регистраторов
+		if (is_array($resultAllIp)) {
+			foreach ($resultAllIp as $key => $valueIp) {
+				$ipddrArr[] = $valueIp['ipaddr'];
+			}
+		}
+   	}
+
    	return $ipddrArr;
 }
 

@@ -51,7 +51,7 @@ if (is_array($ipArr) and (count($ipArr) > 0) ) {
 					}										
 				curl_close($ch);
 			}
-		}
+		}		
 	}
 }
 
