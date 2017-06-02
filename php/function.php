@@ -11,8 +11,8 @@ $urlRegistrator = "http://$registratorIp:2032/list";
 
 	// запишем рез. в перем. а не выведем в браузер
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);	
-	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);	
-	curl_setopt($ch, CURLOPT_TIMEOUT, 5);	
+	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);	
+	curl_setopt($ch, CURLOPT_TIMEOUT, 10);	
 	$data = curl_exec($ch);
 
 	// закроем соединение
